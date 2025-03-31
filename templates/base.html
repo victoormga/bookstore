@@ -1,0 +1,19 @@
+<!--Templates/base.html-->
+
+<DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            {% block title %} {% enblock title %}
+        </title>
+    </head>
+
+    <body>
+        <div class="container">
+            {% block content %}
+            {% enblock content %}
+        </div>
+    </body>
+    
+    </html>
