@@ -1,19 +1,26 @@
 <!--Templates/base.html-->
 
-<DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>
-            {% block title %} {% enblock title %}
-        </title>
-    </head>
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'style.css' %}" />
+        <title>{% block title %} Bookstore {% endblock title %}</title>
+    </head>
     <body>
-        <div class="container">
-            {% block content %}
-            {% enblock content %}
-        </div>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a >Books</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url  'signup' %}">Sign Up</a>
+            <a href="{% url  'logout' %}">Log Out</a>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+        
     </body>
-    
-    </html>
+</html>
