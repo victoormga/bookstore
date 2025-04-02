@@ -13,10 +13,12 @@
     <body>
         <nav>
             <a href="{% url 'home' %}">Home</a>
-            <a >Books</a>
+            {% if user.is_authenticated %}
+            <a href="{% url  'logout' %}">Log Out</a>
+            {% else %}
             <a href="{% url 'login' %}">Login</a>
             <a href="{% url  'signup' %}">Sign Up</a>
-            <a href="{% url  'logout' %}">Log Out</a>
+            {% endif %}
         </nav>
 
         {% block content %}
