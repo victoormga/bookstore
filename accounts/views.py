@@ -25,20 +25,20 @@ def sign_up(request):
 def log_in(request):
     if request.method == 'GET':
         return render(request, 'accounts/login.html', {
-            'form': AuthenticationForm
+            'form': AuthenticationForm()
         })
     else:
-        user = authenticate(
-            request, username = request.POST['username'], password = request.POST['password']
-        )
-        if user is None:
-            return render(request, 'accounts/login.html', {
-                'form': AuthenticationForm,
-                'error': 'Username or password is incorrect'
-            })
-        else:
+        form = AuthenticationForm(data=request.POST)  # Autenticación integrada
+
+        if form.is_valid():
+            user = form.get_user()  # Obtiene el usuario autenticado
             login(request, user)
             return redirect('home')
+        else:
+            return render(request, 'accounts/login.html', {
+                'form': form,
+                'error': 'Username or password is incorrect'
+            })
 
 # Log Out view
 @login_required
