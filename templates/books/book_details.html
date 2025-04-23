@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ book.title }}</h2>
+  <p><strong>Autor:</strong> {{ book.author.name }}</p>
+  <p><strong>Publicado:</strong> {{ book.published_date }}</p>
+  <p><strong>Descripción:</strong> {{ book.description }}</p>
+  <p><strong>Géneros:</strong> 
+    {% for g in book.genre.all %}
+      <span class="badge bg-secondary">{{ g.name }}</span>
+    {% endfor %}
+  </p>
+  <p><strong>Subido por:</strong> {{ book.editor.username }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Lista de Libros</h2>
+  <div class="list-group">
+    {% for book in page_obj %}
+      <a href="{% url 'book_detail' book.pk %}" class="list-group-item list-group-item-action">
+        <strong>{{ book.title }}</strong> - {{ book.author.name }}
+      </a>
+    {% empty %}
+      <p>No hay libros disponibles.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Paginación -->
+  <nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+      {% endif %}
+
+      <li class="page-item active"><a class="page-link">{{ page_obj.number }}</a></li>
+
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endblock %}
