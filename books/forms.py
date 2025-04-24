@@ -1,9 +1,12 @@
 from django import forms
-from .models import Book
+from .models import Book, Author
 
 class BookForm(forms.ModelForm):
-    author = forms.CharField(label='Autor', widget=forms.TextInput(attrs={'placeholder': 'Nombre del autor'}))
-
+    author = forms.ModelChoiceField(
+        queryset=Author.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        empty_label="Selecciona un autor"
+    )
     class Meta:
         model = Book
         exclude = ['editor']
